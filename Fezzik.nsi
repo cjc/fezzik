@@ -37,7 +37,7 @@
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "output\FezzikSetup.exe"
+OutFile "bin\release\FezzikSetup.exe"
 InstallDir "$PROGRAMFILES\Fezzik"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
