@@ -62,7 +62,7 @@ namespace Fezzik
 			this.listView1.GridLines = true;
 			this.listView1.Location = new System.Drawing.Point(0, 17);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(548, 387);
+			this.listView1.Size = new System.Drawing.Size(306, 353);
 			this.listView1.SmallImageList = this.imageList1;
 			this.listView1.TabIndex = 3;
 			this.listView1.UseCompatibleStateImageBehavior = false;
@@ -84,7 +84,7 @@ namespace Fezzik
 			this.label1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(548, 17);
+			this.label1.Size = new System.Drawing.Size(306, 17);
 			this.label1.TabIndex = 4;
 			this.label1.Text = "Results for";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -93,7 +93,7 @@ namespace Fezzik
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(548, 404);
+			this.ClientSize = new System.Drawing.Size(306, 370);
 			this.Controls.Add(this.listView1);
 			this.Controls.Add(this.label1);
 			this.Name = "ResultsForm";

@@ -12,6 +12,7 @@ using System.IO;
 // Temporarily removed pending approval to redistribute code.
 // using MSjogren.Samples.ShellLink;
 using Microsoft.Win32;
+using System.Security.Permissions;
 
 namespace Fezzik
 {
@@ -46,7 +47,7 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 }
 ";
 		}
-		
+
 		void Button1Click(object sender, EventArgs e)
 		{
 			openFileDialog1.ShowDialog();
@@ -56,25 +57,7 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 		{
 			textBox1.Text = openFileDialog1.FileName;
 		}
-		
-		void Button3Click(object sender, EventArgs e)
-		{
-			// Remove menu item.
-		
-			if (radioButton1.Checked)
-			{
-				// RemoveContext Menu
-				RemoveContextMenuItem("FezzikFileRenamer");
-				MessageBox.Show("Context menu item removed.","Fezzik",MessageBoxButtons.OK);
-			} 
-			else if (radioButton2.Checked)
-			{
-				// Remove SendTo Shortcut
-				// Delete the shortcut with the right name under the SendTo folder.
-			}
-			
-		}
-		
+
 		void Button2Click(object sender, EventArgs e)
 		{
 			if (textBox1.Text == "")
@@ -93,28 +76,11 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 					Application.Exit();
 				}
 
-				if (radioButton1.Checked)
-				{
-					// Add Context Menu
-					AddContextMenuItem("FezzikFileRenamer", "Rename files with Fezzik", Application.ExecutablePath + " \"" + textBox1.Text + "\" \"%1\"");
-
-					textBox1.Text = "";
-					MessageBox.Show("Context menu item created","Fezzik",MessageBoxButtons.OK);
-				} 
-				else if (radioButton2.Checked)
-				{
-					// Add SendTo shortcut
-					//MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.SendTo));
-					//ShellShortcut ss = new ShellShortcut(Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\\" + textBox2.Text + ".lnk");
-					//ss.Path = System.Reflection.Assembly.GetExecutingAssembly().Location;
-					//ss.Arguments = "\"" + textBox1.Text + "\"";
-					//ss.Description = "Rename files with Fezzik";
-					//ss.Save();
-	
-					textBox1.Text = "";
-					MessageBox.Show("SendTo shortcut created","Fezzik",MessageBoxButtons.OK);
-
-				}
+				// Add Context Menu
+				AddContextMenuItem("FezzikFileRenamer", textBox2.Text , Application.ExecutablePath + " \"" + textBox1.Text + "\" \"%1\"");
+				textBox1.Text = "";
+				MessageBox.Show("Context menu item created","Fezzik",MessageBoxButtons.OK);
+				GetCurrentContextMenu();
 
 			}
 		}
@@ -183,6 +149,78 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 		void LinkLabel1LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			System.Diagnostics.Process.Start("http://code.google.com/p/fezzik/wiki/BasicUsage");
+		}
+
+		private void CheckSecurity(string MenuName)
+		{
+			//check registry permissions
+			RegistryPermission regPerm;
+			regPerm = new RegistryPermission(RegistryPermissionAccess.Write, "HKEY_CLASSES_ROOT\\Folder\\shell\\" + MenuName);
+			regPerm.AddPathList(RegistryPermissionAccess.Write, "HKEY_CLASSES_ROOT\\Folder\\shell\\" + MenuName + "\\command");
+			regPerm.Demand();
+		}
+		
+		
+		void SetupFormLoad(object sender, EventArgs e)
+		{
+			GetCurrentContextMenu();
+		}
+		
+		void GetCurrentContextMenu()
+		{
+			this.CheckSecurity("FezzikFileRenamer");
+			RegistryKey regmenu = null;
+			RegistryKey regcmd = null;
+
+			regmenu = Registry.ClassesRoot.OpenSubKey("Folder\\shell\\FezzikFileRenamer",false);
+			if(regmenu != null)
+			{
+				this.textBox2.Text = (String)regmenu.GetValue("");
+				regcmd = Registry.ClassesRoot.OpenSubKey("Folder\\shell\\FezzikFileRenamer\\command",false);
+				buttonRemoveContext.Enabled = true;
+				if(regcmd != null)
+				{
+					string[] cmd = ((String)regcmd.GetValue("")).Split("\"".ToCharArray());
+					this.textBox1.Text = cmd[1];
+				}
+			} else {
+				buttonRemoveContext.Enabled = false;
+			}
+
+		}
+		
+		void ButtonRemoveContextClick(object sender, EventArgs e)
+		{
+				// RemoveContext Menu
+				RemoveContextMenuItem("FezzikFileRenamer");
+				MessageBox.Show("Context menu item removed.","Fezzik",MessageBoxButtons.OK);
+				textBox1.Text = "";
+				textBox2.Text = "";
+				buttonRemoveContext.Enabled = false;
+		}
+		
+		void ButtonCreateSendToClick(object sender, EventArgs e)
+		{
+			// Add SendTo shortcut
+			//MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.SendTo));
+			//ShellShortcut ss = new ShellShortcut(Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\\" + textBox2.Text + ".lnk");
+			//ss.Path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+			//ss.Arguments = "\"" + textBox1.Text + "\"";
+			//ss.Description = "Rename files with Fezzik";
+			//ss.Save();
+	
+			textBox1.Text = "";
+			MessageBox.Show("SendTo shortcut created","Fezzik",MessageBoxButtons.OK);
+		}
+		
+		void ButtonChooseEditor2Click(object sender, EventArgs e)
+		{
+			openFileDialog2.ShowDialog();
+		}
+		
+		void OpenFileDialog2FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			textBox3.Text = openFileDialog2.FileName;		
 		}
 	}
 }
