@@ -6,6 +6,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Fezzik</RootNamespace>
     <AssemblyName>Fezzik</AssemblyName>
+    <StartArguments>"C:\Program Files\TextPad 4\TextPad.exe" d:\testspace\</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>

@@ -42,7 +42,7 @@ namespace Fezzik
 			Application.SetCompatibleTextRenderingDefault(false);
 
 			FileInfo indexfile;
-			FileInfo[] origfiles;
+			FileSystemInfo[] origfiles;
 			List<string> newfilenames = new List<string>();
 			//FileSystemWatcher fsw;
 
@@ -79,14 +79,21 @@ namespace Fezzik
 
 				TextWriter tw = new StreamWriter(indexfile.FullName);
 
-				origfiles = di.GetFiles("*.*");
-				foreach(FileInfo fi in origfiles)
+				origfiles = di.GetFileSystemInfos();
+				foreach(FileSystemInfo fsi in origfiles)
 				{
-					tw.WriteLine(fi.Name);
+					if (fsi.GetType() == typeof(FileInfo))
+					{
+						tw.WriteLine(fsi.Name);
+					} 
+					else if (fsi.GetType() == typeof(DirectoryInfo))
+					{
+						tw.WriteLine(fsi.Name + "\\");
+					}
 				}
 				tw.Close();
 
-				// Create FileSytemWatcher to monitor the temp indexfile.
+				//Create FileSytemWatcher to monitor the temp indexfile.
 				//fsw = new FileSystemWatcher(indexfile.Directory.FullName,indexfile.Name);
 				//fsw.NotifyFilter = NotifyFilters.LastWrite;
 				//fsw.Changed += new FileSystemEventHandler(OnChanged);
@@ -113,7 +120,7 @@ namespace Fezzik
 					// Iterate over files, check whether they should be left, renamed or deleted.
 					for (int i=0; i< origfiles.Length;i++)
 					{
-						if (origfiles[i].Name.Equals(newfilenames[i]))
+						if ((origfiles[i].Name.Equals(newfilenames[i])) || ((newfilenames[i].Equals(origfiles[i].Name + "\\")) && (origfiles[i].GetType() == typeof(DirectoryInfo))))
 						{
 							// Don't rename if unchanged
 						}
@@ -146,7 +153,13 @@ namespace Fezzik
 							try
 							{
 								string oldname = origfiles[i].Name;
-								origfiles[i].MoveTo(origfiles[i].Directory.FullName + "\\" + newfilenames[i]);
+								if (origfiles[i].GetType() == typeof(FileInfo))
+								{
+									((FileInfo)origfiles[i]).MoveTo(((FileInfo)origfiles[i]).Directory.FullName + "\\" + newfilenames[i]);
+								} else if (origfiles[i].GetType() == typeof(DirectoryInfo))
+								{
+									((DirectoryInfo)origfiles[i]).MoveTo(((DirectoryInfo)origfiles[i]).Parent.FullName + "\\" + newfilenames[i]);
+								}
 								ops.Add(new FezzikOp(oldname,newfilenames[i],FezzikOpTypes.Rename));
 							}
 							catch (IOException ioe)
@@ -160,6 +173,5 @@ namespace Fezzik
 				}
 			}
 		}
-
 	}
 }
