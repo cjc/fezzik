@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Fezzik"
-!define PRODUCT_VERSION "1.2"
+!define PRODUCT_VERSION "1.3"
 !define PRODUCT_PUBLISHER "Cameron Coley"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\Fezzik.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
