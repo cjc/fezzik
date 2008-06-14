@@ -99,7 +99,7 @@ namespace Fezzik
 				//fsw.Changed += new FileSystemEventHandler(OnChanged);
 				//fsw.EnableRaisingEvents = true;
 
-				Process p = Process.Start(args[0],indexfile.FullName);
+				Process p = Process.Start(args[0],"\"" + indexfile.FullName + "\"");
 				p.WaitForInputIdle();
 				p.WaitForExit();
 

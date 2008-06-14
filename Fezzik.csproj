@@ -6,7 +6,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Fezzik</RootNamespace>
     <AssemblyName>Fezzik</AssemblyName>
-    <StartArguments>"C:\Program Files\TextPad 4\TextPad.exe" d:\testspace\</StartArguments>
+    <StartArguments>"C:\Program Files\Vim\vim71\gvim.exe" c:\codey\testspace\</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
