@@ -77,11 +77,10 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 				}
 
 				// Add Context Menu
-				AddContextMenuItem("FezzikFileRenamer", textBox2.Text , Application.ExecutablePath + " \"" + textBox1.Text + "\" \"%1\"");
+				AddContextMenuItem("FezzikFileRenamer", textBox2.Text , Application.ExecutablePath + " \"" + textBox1.Text + "\" \"%1\" \"" + textBox5.Text + "\"");
 				textBox1.Text = "";
 				MessageBox.Show("Context menu item created","Fezzik",MessageBoxButtons.OK);
 				GetCurrentContextMenu();
-
 			}
 		}
 
@@ -182,6 +181,7 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 				{
 					string[] cmd = ((String)regcmd.GetValue("")).Split("\"".ToCharArray());
 					this.textBox1.Text = cmd[1];
+					this.textBox5.Text = cmd[5];
 				}
 			} else {
 				buttonRemoveContext.Enabled = false;
@@ -222,5 +222,6 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 		{
 			textBox3.Text = openFileDialog2.FileName;		
 		}
+	
 	}
 }

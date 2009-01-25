@@ -62,6 +62,8 @@ namespace Fezzik
 			this.tabPageAbout = new System.Windows.Forms.TabPage();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+			this.textBox5 = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.tabPageSetup.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -104,7 +106,7 @@ namespace Fezzik
 			// 
 			// buttonUpdateContext
 			// 
-			this.buttonUpdateContext.Location = new System.Drawing.Point(49, 142);
+			this.buttonUpdateContext.Location = new System.Drawing.Point(53, 162);
 			this.buttonUpdateContext.Name = "buttonUpdateContext";
 			this.buttonUpdateContext.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.buttonUpdateContext.Size = new System.Drawing.Size(125, 23);
@@ -177,7 +179,6 @@ namespace Fezzik
 			this.textBox4.Size = new System.Drawing.Size(370, 20);
 			this.textBox4.TabIndex = 8;
 			this.textBox4.Text = "Rename Files with Fezzik";
-
 			// 
 			// label6
 			// 
@@ -186,7 +187,6 @@ namespace Fezzik
 			this.label6.Size = new System.Drawing.Size(256, 23);
 			this.label6.TabIndex = 9;
 			this.label6.Text = "Choose the wording for your context menu item";
-
 			// 
 			// textBox3
 			// 
@@ -234,6 +234,8 @@ namespace Fezzik
 			// 
 			// groupBoxContext
 			// 
+			this.groupBoxContext.Controls.Add(this.textBox5);
+			this.groupBoxContext.Controls.Add(this.label7);
 			this.groupBoxContext.Controls.Add(this.textBox2);
 			this.groupBoxContext.Controls.Add(this.textBox1);
 			this.groupBoxContext.Controls.Add(this.buttonRemoveContext);
@@ -251,7 +253,7 @@ namespace Fezzik
 			// 
 			// textBox2
 			// 
-			this.textBox2.Location = new System.Drawing.Point(8, 91);
+			this.textBox2.Location = new System.Drawing.Point(7, 120);
 			this.textBox2.Name = "textBox2";
 			this.textBox2.Size = new System.Drawing.Size(370, 20);
 			this.textBox2.TabIndex = 6;
@@ -260,7 +262,7 @@ namespace Fezzik
 			// buttonRemoveContext
 			// 
 			this.buttonRemoveContext.Enabled = false;
-			this.buttonRemoveContext.Location = new System.Drawing.Point(201, 142);
+			this.buttonRemoveContext.Location = new System.Drawing.Point(205, 162);
 			this.buttonRemoveContext.Name = "buttonRemoveContext";
 			this.buttonRemoveContext.Size = new System.Drawing.Size(125, 23);
 			this.buttonRemoveContext.TabIndex = 8;
@@ -270,7 +272,7 @@ namespace Fezzik
 			// 
 			// label4
 			// 
-			this.label4.Location = new System.Drawing.Point(8, 75);
+			this.label4.Location = new System.Drawing.Point(7, 104);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(256, 23);
 			this.label4.TabIndex = 7;
@@ -284,7 +286,7 @@ namespace Fezzik
 			this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
 			this.tabPageHelp.Name = "tabPageHelp";
 			this.tabPageHelp.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageHelp.Size = new System.Drawing.Size(442, 420);
+			this.tabPageHelp.Size = new System.Drawing.Size(438, 430);
 			this.tabPageHelp.TabIndex = 1;
 			this.tabPageHelp.Text = "Help";
 			// 
@@ -313,7 +315,7 @@ namespace Fezzik
 			this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
 			this.tabPageAbout.Name = "tabPageAbout";
 			this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageAbout.Size = new System.Drawing.Size(442, 420);
+			this.tabPageAbout.Size = new System.Drawing.Size(438, 430);
 			this.tabPageAbout.TabIndex = 2;
 			this.tabPageAbout.Text = "About";
 			// 
@@ -325,7 +327,7 @@ namespace Fezzik
 			this.richTextBox1.Location = new System.Drawing.Point(3, 3);
 			this.richTextBox1.Name = "richTextBox1";
 			this.richTextBox1.ReadOnly = true;
-			this.richTextBox1.Size = new System.Drawing.Size(436, 414);
+			this.richTextBox1.Size = new System.Drawing.Size(432, 424);
 			this.richTextBox1.TabIndex = 0;
 			this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
 			// 
@@ -334,6 +336,21 @@ namespace Fezzik
 			this.openFileDialog2.Filter = "Executables|*.exe";
 			this.openFileDialog2.Title = "Choose your preferred text editor";
 			this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog2FileOk);
+			// 
+			// textBox5
+			// 
+			this.textBox5.Location = new System.Drawing.Point(8, 81);
+			this.textBox5.Name = "textBox5";
+			this.textBox5.Size = new System.Drawing.Size(370, 20);
+			this.textBox5.TabIndex = 9;
+			// 
+			// label7
+			// 
+			this.label7.Location = new System.Drawing.Point(8, 65);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(256, 23);
+			this.label7.TabIndex = 10;
+			this.label7.Text = "Command Line Options";
 			// 
 			// SetupForm
 			// 
@@ -358,6 +375,8 @@ namespace Fezzik
 			this.tabPageAbout.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox textBox5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TextBox textBox4;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

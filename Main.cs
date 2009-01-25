@@ -62,10 +62,11 @@ namespace Fezzik
 			else if (args.Length == 0) {
 				Application.Run(new SetupForm());
 			}
-			else if (args.Length != 2) {
-				MessageBox.Show("Invalid Arguments. Arguments must consist of: Path to Text Editor Exe, Path to directory to rename.","Fezzik Error", MessageBoxButtons.OK);
+			else if (args.Length != 2 && args.Length != 3) {
+				MessageBox.Show("Invalid Arguments. Arguments must consist of: Path to Text Editor Exe, Path to directory to rename, command line options to pass through to the text editor exe (optional).","Fezzik Error", MessageBoxButtons.OK);
 				Application.Exit();
 			} else {
+				
 				// Create DirectoryInfo object and check that directory exists
 				DirectoryInfo di = new DirectoryInfo(args[1]);
 				if (!di.Exists)
@@ -99,7 +100,9 @@ namespace Fezzik
 				//fsw.Changed += new FileSystemEventHandler(OnChanged);
 				//fsw.EnableRaisingEvents = true;
 
-				Process p = Process.Start(args[0],"\"" + indexfile.FullName + "\"");
+				string argline = args[2] + " \"" + indexfile.FullName + "\"";
+				
+				Process p = Process.Start(args[0],argline);
 				p.WaitForInputIdle();
 				p.WaitForExit();
 
