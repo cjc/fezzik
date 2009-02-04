@@ -81,16 +81,19 @@ namespace Fezzik
 				TextWriter tw = new StreamWriter(indexfile.FullName);
 
 				origfiles = di.GetFileSystemInfos();
+				bool firstline = true;
 				foreach(FileSystemInfo fsi in origfiles)
 				{
+					if (!firstline) tw.Write(tw.NewLine);
 					if (fsi.GetType() == typeof(FileInfo))
 					{
-						tw.WriteLine(fsi.Name);
+						tw.Write(fsi.Name);
 					} 
 					else if (fsi.GetType() == typeof(DirectoryInfo))
 					{
-						tw.WriteLine(fsi.Name + "\\");
+						tw.Write(fsi.Name + "\\");
 					}
+					firstline = false;
 				}
 				tw.Close();
 
