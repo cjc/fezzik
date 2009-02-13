@@ -9,8 +9,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-// Temporarily removed pending approval to redistribute code.
-// using MSjogren.Samples.ShellLink;
 using Microsoft.Win32;
 using System.Security.Permissions;
 
@@ -28,9 +26,6 @@ namespace Fezzik
 			//
 			InitializeComponent();
 
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
 			richTextBox1.Rtf = @"{\rtf1\ansi\ansicpg1252\deff0\deflang3081{\fonttbl{\f0\fswiss\fprq2\fcharset0 Century Gothic;}{\f1\fswiss\fcharset0 Arial;}}
 {\colortbl ;\red0\green0\blue0;}
 {\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\qc\cf1\f0\fs72 Fezzik\cf0\f1\fs20\par
@@ -40,10 +35,6 @@ http://code.google.com/p/fezzik\par
 \b\fs18 Silk - \b0 http://www.famfamfam.com/lab/icons/silk/\b\par
 \b0\par
 This program uses selected icons from the excellent Silk set by Mark James.\par
-\par
-\b ShellLink - \b0 http://www.msjogren.net/dotnet/eng/samples/dotnet_shelllink.asp\b\par
-\b0\par
-This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts in the SendTo menu.\fs20\par
 }
 ";
 		}
@@ -197,30 +188,6 @@ This program uses code from Mattias Sj\'f6gren's ShellLink to create shortcuts i
 				textBox1.Text = "";
 				textBox2.Text = "";
 				buttonRemoveContext.Enabled = false;
-		}
-		
-		void ButtonCreateSendToClick(object sender, EventArgs e)
-		{
-			// Add SendTo shortcut
-			//MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.SendTo));
-			//ShellShortcut ss = new ShellShortcut(Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\\" + textBox2.Text + ".lnk");
-			//ss.Path = System.Reflection.Assembly.GetExecutingAssembly().Location;
-			//ss.Arguments = "\"" + textBox1.Text + "\"";
-			//ss.Description = "Rename files with Fezzik";
-			//ss.Save();
-	
-			textBox1.Text = "";
-			MessageBox.Show("SendTo shortcut created","Fezzik",MessageBoxButtons.OK);
-		}
-		
-		void ButtonChooseEditor2Click(object sender, EventArgs e)
-		{
-			openFileDialog2.ShowDialog();
-		}
-		
-		void OpenFileDialog2FileOk(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			textBox3.Text = openFileDialog2.FileName;		
 		}
 	
 	}

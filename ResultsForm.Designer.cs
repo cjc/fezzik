@@ -35,22 +35,19 @@ namespace Fezzik
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultsForm));
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.listView1 = new System.Windows.Forms.ListView();
 			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
 			this.label1 = new System.Windows.Forms.Label();
+			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.SuspendLayout();
 			// 
 			// imageList1
 			// 
-			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+			this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+			this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
 			this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-			this.imageList1.Images.SetKeyName(0, "arrow_switch.png");
-			this.imageList1.Images.SetKeyName(1, "delete.png");
-			this.imageList1.Images.SetKeyName(2, "information.png");
-			this.imageList1.Images.SetKeyName(3, "error.png");
 			// 
 			// listView1
 			// 
@@ -89,6 +86,11 @@ namespace Fezzik
 			this.label1.Text = "Results for";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// backgroundWorker1
+			// 
+			this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1DoWork);
+			this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1RunWorkerCompleted);
+			// 
 			// ResultsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,6 +102,7 @@ namespace Fezzik
 			this.Text = "Fezzik Results";
 			this.ResumeLayout(false);
 		}
+		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader1;

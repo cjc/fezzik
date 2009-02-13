@@ -44,15 +44,9 @@ namespace Fezzik
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPageSetup = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.groupBoxSendTo = new System.Windows.Forms.GroupBox();
-			this.textBox4 = new System.Windows.Forms.TextBox();
-			this.label6 = new System.Windows.Forms.Label();
-			this.textBox3 = new System.Windows.Forms.TextBox();
-			this.label5 = new System.Windows.Forms.Label();
-			this.buttonChooseEditor2 = new System.Windows.Forms.Button();
-			this.label3 = new System.Windows.Forms.Label();
-			this.buttonCreateSendTo = new System.Windows.Forms.Button();
 			this.groupBoxContext = new System.Windows.Forms.GroupBox();
+			this.textBox5 = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.buttonRemoveContext = new System.Windows.Forms.Button();
 			this.label4 = new System.Windows.Forms.Label();
@@ -62,12 +56,9 @@ namespace Fezzik
 			this.tabPageAbout = new System.Windows.Forms.TabPage();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-			this.textBox5 = new System.Windows.Forms.TextBox();
-			this.label7 = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.tabPageSetup.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.groupBoxSendTo.SuspendLayout();
 			this.groupBoxContext.SuspendLayout();
 			this.tabPageHelp.SuspendLayout();
 			this.tabPageAbout.SuspendLayout();
@@ -129,7 +120,7 @@ namespace Fezzik
 			// 
 			// tabPageSetup
 			// 
-			this.tabPageSetup.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.tabPageSetup.BackColor = System.Drawing.SystemColors.Control;
 			this.tabPageSetup.Controls.Add(this.tableLayoutPanel1);
 			this.tabPageSetup.Location = new System.Drawing.Point(4, 22);
 			this.tabPageSetup.Name = "tabPageSetup";
@@ -140,97 +131,18 @@ namespace Fezzik
 			// 
 			// tableLayoutPanel1
 			// 
+			this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
 			this.tableLayoutPanel1.ColumnCount = 1;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Controls.Add(this.groupBoxSendTo, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.groupBoxContext, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.41509F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.58491F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(432, 424);
 			this.tableLayoutPanel1.TabIndex = 12;
-			// 
-			// groupBoxSendTo
-			// 
-			this.groupBoxSendTo.Controls.Add(this.textBox4);
-			this.groupBoxSendTo.Controls.Add(this.label6);
-			this.groupBoxSendTo.Controls.Add(this.textBox3);
-			this.groupBoxSendTo.Controls.Add(this.label5);
-			this.groupBoxSendTo.Controls.Add(this.buttonChooseEditor2);
-			this.groupBoxSendTo.Controls.Add(this.label3);
-			this.groupBoxSendTo.Controls.Add(this.buttonCreateSendTo);
-			this.groupBoxSendTo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBoxSendTo.Enabled = false;
-			this.groupBoxSendTo.Location = new System.Drawing.Point(3, 215);
-			this.groupBoxSendTo.Name = "groupBoxSendTo";
-			this.groupBoxSendTo.Padding = new System.Windows.Forms.Padding(7);
-			this.groupBoxSendTo.Size = new System.Drawing.Size(426, 206);
-			this.groupBoxSendTo.TabIndex = 11;
-			this.groupBoxSendTo.TabStop = false;
-			this.groupBoxSendTo.Text = "SendTo Menu";
-			// 
-			// textBox4
-			// 
-			this.textBox4.Location = new System.Drawing.Point(10, 136);
-			this.textBox4.Name = "textBox4";
-			this.textBox4.Size = new System.Drawing.Size(370, 20);
-			this.textBox4.TabIndex = 8;
-			this.textBox4.Text = "Rename Files with Fezzik";
-			// 
-			// label6
-			// 
-			this.label6.Location = new System.Drawing.Point(10, 120);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(256, 23);
-			this.label6.TabIndex = 9;
-			this.label6.Text = "Choose the wording for your context menu item";
-			// 
-			// textBox3
-			// 
-			this.textBox3.Location = new System.Drawing.Point(10, 88);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(370, 20);
-			this.textBox3.TabIndex = 4;
-			// 
-			// label5
-			// 
-			this.label5.Location = new System.Drawing.Point(10, 72);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(256, 23);
-			this.label5.TabIndex = 6;
-			this.label5.Text = "Choose your preferred text editor (.exe)";
-			// 
-			// buttonChooseEditor2
-			// 
-			this.buttonChooseEditor2.Location = new System.Drawing.Point(386, 88);
-			this.buttonChooseEditor2.Name = "buttonChooseEditor2";
-			this.buttonChooseEditor2.Size = new System.Drawing.Size(28, 20);
-			this.buttonChooseEditor2.TabIndex = 5;
-			this.buttonChooseEditor2.Text = "...";
-			this.buttonChooseEditor2.UseVisualStyleBackColor = true;
-			this.buttonChooseEditor2.Click += new System.EventHandler(this.ButtonChooseEditor2Click);
-			// 
-			// label3
-			// 
-			this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.label3.Location = new System.Drawing.Point(7, 20);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(412, 40);
-			this.label3.TabIndex = 1;
-			this.label3.Text = resources.GetString("label3.Text");
-			// 
-			// buttonCreateSendTo
-			// 
-			this.buttonCreateSendTo.Location = new System.Drawing.Point(49, 168);
-			this.buttonCreateSendTo.Name = "buttonCreateSendTo";
-			this.buttonCreateSendTo.Size = new System.Drawing.Size(125, 23);
-			this.buttonCreateSendTo.TabIndex = 0;
-			this.buttonCreateSendTo.Text = "Create SendTo Link";
-			this.buttonCreateSendTo.UseVisualStyleBackColor = true;
-			this.buttonCreateSendTo.Click += new System.EventHandler(this.ButtonCreateSendToClick);
 			// 
 			// groupBoxContext
 			// 
@@ -246,10 +158,25 @@ namespace Fezzik
 			this.groupBoxContext.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBoxContext.Location = new System.Drawing.Point(3, 3);
 			this.groupBoxContext.Name = "groupBoxContext";
-			this.groupBoxContext.Size = new System.Drawing.Size(426, 206);
+			this.groupBoxContext.Size = new System.Drawing.Size(426, 211);
 			this.groupBoxContext.TabIndex = 10;
 			this.groupBoxContext.TabStop = false;
 			this.groupBoxContext.Text = "Context Menu";
+			// 
+			// textBox5
+			// 
+			this.textBox5.Location = new System.Drawing.Point(8, 81);
+			this.textBox5.Name = "textBox5";
+			this.textBox5.Size = new System.Drawing.Size(370, 20);
+			this.textBox5.TabIndex = 9;
+			// 
+			// label7
+			// 
+			this.label7.Location = new System.Drawing.Point(8, 65);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(256, 23);
+			this.label7.TabIndex = 10;
+			this.label7.Text = "Command Line Options";
 			// 
 			// textBox2
 			// 
@@ -280,7 +207,7 @@ namespace Fezzik
 			// 
 			// tabPageHelp
 			// 
-			this.tabPageHelp.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.tabPageHelp.BackColor = System.Drawing.SystemColors.Control;
 			this.tabPageHelp.Controls.Add(this.label2);
 			this.tabPageHelp.Controls.Add(this.linkLabel1);
 			this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
@@ -310,7 +237,7 @@ namespace Fezzik
 			// 
 			// tabPageAbout
 			// 
-			this.tabPageAbout.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.tabPageAbout.BackColor = System.Drawing.SystemColors.Control;
 			this.tabPageAbout.Controls.Add(this.richTextBox1);
 			this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
 			this.tabPageAbout.Name = "tabPageAbout";
@@ -321,36 +248,14 @@ namespace Fezzik
 			// 
 			// richTextBox1
 			// 
-			this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
 			this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.richTextBox1.Location = new System.Drawing.Point(3, 3);
+			this.richTextBox1.Location = new System.Drawing.Point(23, 21);
 			this.richTextBox1.Name = "richTextBox1";
 			this.richTextBox1.ReadOnly = true;
-			this.richTextBox1.Size = new System.Drawing.Size(432, 424);
+			this.richTextBox1.Size = new System.Drawing.Size(253, 191);
 			this.richTextBox1.TabIndex = 0;
 			this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
-			// 
-			// openFileDialog2
-			// 
-			this.openFileDialog2.Filter = "Executables|*.exe";
-			this.openFileDialog2.Title = "Choose your preferred text editor";
-			this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog2FileOk);
-			// 
-			// textBox5
-			// 
-			this.textBox5.Location = new System.Drawing.Point(8, 81);
-			this.textBox5.Name = "textBox5";
-			this.textBox5.Size = new System.Drawing.Size(370, 20);
-			this.textBox5.TabIndex = 9;
-			// 
-			// label7
-			// 
-			this.label7.Location = new System.Drawing.Point(8, 65);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(256, 23);
-			this.label7.TabIndex = 10;
-			this.label7.Text = "Command Line Options";
 			// 
 			// SetupForm
 			// 
@@ -367,8 +272,6 @@ namespace Fezzik
 			this.tabControl1.ResumeLayout(false);
 			this.tabPageSetup.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
-			this.groupBoxSendTo.ResumeLayout(false);
-			this.groupBoxSendTo.PerformLayout();
 			this.groupBoxContext.ResumeLayout(false);
 			this.groupBoxContext.PerformLayout();
 			this.tabPageHelp.ResumeLayout(false);
@@ -377,21 +280,13 @@ namespace Fezzik
 		}
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox textBox5;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.TextBox textBox4;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Button buttonChooseEditor1;
-		private System.Windows.Forms.Button buttonChooseEditor2;
 		private System.Windows.Forms.OpenFileDialog openFileDialog2;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.Button buttonCreateSendTo;
 		private System.Windows.Forms.Button buttonUpdateContext;
 		private System.Windows.Forms.Button buttonRemoveContext;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.GroupBox groupBoxSendTo;
 		private System.Windows.Forms.GroupBox groupBoxContext;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.LinkLabel linkLabel1;

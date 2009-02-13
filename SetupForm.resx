@@ -120,9 +120,6 @@
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>19, 23</value>
   </metadata>
-  <data name="label3.Text" xml:space="preserve">
-    <value>A SendTo shortcut can be created as an alternative to using a first level Context Menu item. You may prefer to use this if your Context Menu is already crowded, or if you would like to create multiple links for different text editors.</value>
-  </data>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Fezzik
 A text editor based file renamer
