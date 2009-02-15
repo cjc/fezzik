@@ -15,17 +15,6 @@ using System.Diagnostics;
 namespace Fezzik
 {
 	
-	class WorkerArgs
-	{
-		public WorkerArgs(string editor, string args)
-		{
-			Editor = editor;
-			Args = args;
-		}
-		public string Editor;
-		public string Args;
-	}
-	
 	/// <summary>
 	/// Description of ResultsForm.
 	/// </summary>
@@ -39,6 +28,8 @@ namespace Fezzik
 		{
 			InitializeComponent();
 			dirname = dir;
+			completedPanel.Visible = false;
+			DisplayOps(new List<FezzikOp>());
 		}
 		
 		public void FezzikDirectory(string editor, string arguments, DirectoryInfo di)
@@ -66,16 +57,12 @@ namespace Fezzik
 			}
 			tw.Close();
 
-			
-			//FIXME: BAD!
-			Control.CheckForIllegalCrossThreadCalls = false;
 			//Create FileSytemWatcher to monitor the temp indexfile.
 			FileSystemWatcher fsw = new FileSystemWatcher(indexfile.Directory.FullName,indexfile.Name);
 			fsw.NotifyFilter = NotifyFilters.LastWrite;
 			fsw.Changed += new FileSystemEventHandler(OnChanged);
 			fsw.EnableRaisingEvents = true;
 
-			
 			string argline = arguments + " \"" + indexfile.FullName + "\"";
 
 			backgroundWorker1.RunWorkerAsync(new WorkerArgs(editor, argline));
@@ -202,20 +189,17 @@ namespace Fezzik
 		
 	    private void OnChanged(object source, FileSystemEventArgs e)
 	    {
-	    	lock(typeof(TextReader))
+	    	lock(timer1)
 	    	{
-		    	List<string> newfilenames = new List<string>();
-		        // Specify what is done when a file is changed, created, or deleted.
-				TextReader tr = new StreamReader(indexfile.FullName);
-				while(tr.Peek() != -1)
-				{
-					newfilenames.Add(tr.ReadLine());
-				}
-				tr.Close();
-				tr.Dispose();
-				
-				List<FezzikOp> ops = ProcessChanges(origfiles,newfilenames, "", false);
-				this.DisplayOps(ops);
+			   if (this.InvokeRequired)
+			   {
+			      this.BeginInvoke(new MethodInvoker(delegate()
+			      {
+                   	timer1.Stop();
+    				timer1.Enabled = true;
+    				timer1.Start();
+			      }));
+			   }
 	    	}
 	    }
 	    
@@ -244,8 +228,41 @@ namespace Fezzik
 			}
 			tr.Close();
 			
-			//List<FezzikOp> ops = ProcessChanges(origfiles,newfilenames, "", true);
-			//this.DisplayOps(ops);
+			List<FezzikOp> ops = ProcessChanges(origfiles,newfilenames, "", true);
+			this.DisplayOps(ops);
+			previewPanel.Visible = false;
+			completedPanel.Visible = true;
+		}
+		
+		void Timer1Tick(object sender, EventArgs e)
+		{
+			List<string> newfilenames = new List<string>();
+			try {
+				// Specify what is done when a file is changed, created, or deleted.
+				TextReader tr = new StreamReader(indexfile.FullName);
+				while(tr.Peek() != -1)
+				{
+					newfilenames.Add(tr.ReadLine());
+				}
+				tr.Close();
+				// Read was successful, disable timer.
+				timer1.Enabled = false;
+				
+				List<FezzikOp> ops = ProcessChanges(origfiles,newfilenames, "", false);
+				this.DisplayOps(ops);
+			}
+			catch (System.IO.IOException)
+			{
+				// An IOException here probably means the text editor is still writing the file, try again at next tick.
+	    		timer1.Enabled = true;
+	    		timer1.Interval = 200;
+			}
+		}
+		
+		
+		void CancelButtonClick(object sender, EventArgs e)
+		{
+			Application.Exit();
 		}
 	}
 
@@ -266,4 +283,17 @@ namespace Fezzik
             return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
         }
     }	
+
+	class WorkerArgs
+	{
+		public WorkerArgs(string editor, string args)
+		{
+			Editor = editor;
+			Args = args;
+		}
+		public string Editor;
+		public string Args;
+	}
+	
+    
 }
