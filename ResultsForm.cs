@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
@@ -23,12 +24,14 @@ namespace Fezzik
 		private string dirname;
 		private FileSystemInfo[] origfiles;	
 		private FileInfo indexfile;
-		
+
+        private int FezzikWindowWidth = 450;
+
 		public ResultsForm(string dir)
 		{
 			InitializeComponent();
 			dirname = dir;
-			completedPanel.Visible = false;
+			// FIXME: completedPanel.Visible = false;
 			DisplayOps(new List<FezzikOp>());
 		}
 		
@@ -37,6 +40,10 @@ namespace Fezzik
 
 			//Obtain and open a temp file. Write all the filenames into the temp file
 			indexfile = new FileInfo(Path.GetTempFileName());
+
+            this.DesktopLocation = new Point(0,0);
+            this.Width = FezzikWindowWidth;
+            this.Height = Screen.GetWorkingArea(this).Height;
 
 			TextWriter tw = new StreamWriter(indexfile.FullName);
 
@@ -126,10 +133,12 @@ namespace Fezzik
 					if ((origfiles[i].Name.Equals(newfilenames[i])) || ((newfilenames[i].Equals(origfiles[i].Name + "\\")) && (origfiles[i].GetType() == typeof(DirectoryInfo))))
 					{
 						// Don't rename if unchanged
+                        ops.Add(new FezzikOp(origfiles[i].Name,"", FezzikOpTypes.Info));
 					}
 					else if (newfilenames[i].Equals("?"))
 					{
 						// Don't rename if new name is "?"
+                        ops.Add(new FezzikOp(origfiles[i].Name, "", FezzikOpTypes.Info));
 					}
 					else if (newfilenames[i].Equals(""))
 					{
@@ -214,6 +223,7 @@ namespace Fezzik
 			WorkerArgs wa = (WorkerArgs)e.Argument;
 			Process p = Process.Start(wa.Editor,wa.Args);
 			p.WaitForInputIdle();
+            ResizeMainWindow(p);
 			p.WaitForExit();			
 		}
 		
@@ -230,8 +240,9 @@ namespace Fezzik
 			
 			List<FezzikOp> ops = ProcessChanges(origfiles,newfilenames, "", true);
 			this.DisplayOps(ops);
-			previewPanel.Visible = false;
-			completedPanel.Visible = true;
+            //FIXME:
+            //previewPanel.Visible = false;
+            //completedPanel.Visible = true;
 		}
 		
 		void Timer1Tick(object sender, EventArgs e)
@@ -264,6 +275,23 @@ namespace Fezzik
 		{
 			Application.Exit();
 		}
+
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter,
+            int x, int y, int width, int height, uint uFlags);
+
+        private const uint SHOWWINDOW = 0x0040;
+
+        private void ResizeMainWindow(System.Diagnostics.Process process)
+        {
+            if (process != null)
+            {
+                SetWindowPos(process.MainWindowHandle, this.Handle,
+                    FezzikWindowWidth, 0, Screen.GetWorkingArea(this).Width - FezzikWindowWidth,
+                    Screen.GetWorkingArea(this).Height, SHOWWINDOW);
+            }
+        }
+
 	}
 
 	// Implements the manual sorting of items by columns.
