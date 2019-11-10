@@ -190,7 +190,8 @@ namespace Fezzik
 			{
 				System.Diagnostics.EventLog appLog = new System.Diagnostics.EventLog() ;
 				appLog.Source = "Fezzik File Renamer";
-				appLog.WriteEntry(sblog.ToString());
+				//TODO: fix security exception on log write
+				//appLog.WriteEntry(sblog.ToString());
 			}
 			
 	    	return ops;

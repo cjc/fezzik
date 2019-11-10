@@ -83,56 +83,45 @@ This program uses selected icons from the excellent Silk set by Mark James.\par
 		private bool AddContextMenuItem(string MenuName, string MenuDescription, string MenuCommand)
 		{
 		  bool ret = false;
-		  RegistryKey rkey =
-		    Registry.ClassesRoot.OpenSubKey("Folder");
-		  if(rkey != null)
-		  {
-		    string extstring = rkey.GetValue("").ToString();
-		    rkey.Close();
-		    if( extstring != null )
-		    {
-		      if( extstring.Length > 0 )
-		      {
-		        rkey = Registry.ClassesRoot.OpenSubKey(
-		          extstring,true);
-		        if(rkey != null)
-		        {
-		          string strkey = "shell\\" + MenuName + "\\command";
-		          RegistryKey subky = rkey.CreateSubKey(strkey);
-		          if(subky != null)
-		          {
-		            subky.SetValue("",MenuCommand);
-		            subky.Close();
-		            subky = rkey.OpenSubKey("shell\\" +
-		              MenuName, true);
-		            if(subky != null)
-		            {
-		              subky.SetValue("",MenuDescription);
-		              subky.Close();
-		            }
-		            ret = true;
-		          }
-		          rkey.Close();
-		        }
-		      }
-		    }
-		  }
+		  RegistryKey rkey = Registry.CurrentUser.OpenSubKey("Software\\Classes", true);
+		  rkey = rkey.CreateSubKey("Directory");
+		  
+	        if(rkey != null)
+	        {
+	          string strkey = "shell\\" + MenuName + "\\command";
+	          RegistryKey subky = rkey.CreateSubKey(strkey);
+	          if(subky != null)
+	          {
+	            subky.SetValue("",MenuCommand);
+	            subky.Close();
+	            subky = rkey.OpenSubKey("shell\\" +
+	              MenuName, true);
+	            if(subky != null)
+	            {
+	              subky.SetValue("",MenuDescription);
+	              subky.Close();
+	            }
+	            ret = true;
+	          }
+	          rkey.Close();
+	        }
+
 		  return ret;
 		}		
 		
 		private void RemoveContextMenuItem(string MenuName)
 		{
-			RegistryKey reg = Registry.ClassesRoot.OpenSubKey("Folder\\shell\\" + MenuName + "\\command");
+			RegistryKey reg = Registry.CurrentUser.OpenSubKey("Software\\Classes\\Directory\\shell\\" + MenuName + "\\command");
 			if(reg != null)
 			{
 				reg.Close();
-				Registry.ClassesRoot.DeleteSubKey("Folder\\shell\\" + MenuName + "\\command");
+				Registry.CurrentUser.DeleteSubKey("Software\\Classes\\Directory\\shell\\" + MenuName + "\\command");
 			}
-			reg = Registry.ClassesRoot.OpenSubKey("Folder\\shell\\" + MenuName);
+			reg = Registry.CurrentUser.OpenSubKey("Software\\Classes\\Directory\\shell\\" + MenuName);
 			if(reg != null)
 			{
 				reg.Close();
-				Registry.ClassesRoot.DeleteSubKey("Folder\\shell\\" + MenuName);
+				Registry.CurrentUser.DeleteSubKey("Software\\Classes\\Directory\\shell\\" + MenuName);
 			}
 		}
 		
@@ -145,8 +134,8 @@ This program uses selected icons from the excellent Silk set by Mark James.\par
 		{
 			//check registry permissions
 			RegistryPermission regPerm;
-			regPerm = new RegistryPermission(RegistryPermissionAccess.Write, "HKEY_CLASSES_ROOT\\Folder\\shell\\" + MenuName);
-			regPerm.AddPathList(RegistryPermissionAccess.Write, "HKEY_CLASSES_ROOT\\Folder\\shell\\" + MenuName + "\\command");
+			regPerm = new RegistryPermission(RegistryPermissionAccess.Write, "HKEY_CURRENT_USER\\Software\\Classes\\Directory\\shell\\" + MenuName);
+			regPerm.AddPathList(RegistryPermissionAccess.Write, "HKEY_CURRENT_USER\\Software\\Classes\\Directory\\shell\\" + MenuName + "\\command");
 			regPerm.Demand();
 		}
 		
@@ -162,11 +151,11 @@ This program uses selected icons from the excellent Silk set by Mark James.\par
 			RegistryKey regmenu = null;
 			RegistryKey regcmd = null;
 
-			regmenu = Registry.ClassesRoot.OpenSubKey("Folder\\shell\\FezzikFileRenamer",false);
+			regmenu = Registry.CurrentUser.OpenSubKey("Software\\Classes\\Directory\\shell\\FezzikFileRenamer",false);
 			if(regmenu != null)
 			{
 				this.textBox2.Text = (String)regmenu.GetValue("");
-				regcmd = Registry.ClassesRoot.OpenSubKey("Folder\\shell\\FezzikFileRenamer\\command",false);
+				regcmd = Registry.CurrentUser.OpenSubKey("Software\\Classes\\Directory\\shell\\FezzikFileRenamer\\command",false);
 				buttonRemoveContext.Enabled = true;
 				if(regcmd != null)
 				{
@@ -176,7 +165,7 @@ This program uses selected icons from the excellent Silk set by Mark James.\par
 				}
 			} else {
 				buttonRemoveContext.Enabled = false;
-			}
+			}	
 
 		}
 		
